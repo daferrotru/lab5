@@ -5,7 +5,75 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head></h:head>
     <h:body>
-        
+        <p:separator />
+            <h:form id="cr">
+            
+                    <p:dataTable var="clientes" value="#{AlquilerItems.clientes}" >
+                    
+                        <f:facet name="header">
+                            List of Clients
+                        </f:facet>
+                        <p:column>
+                            <f:facet name="header">
+                                Client name
+                            </f:facet>
+                                #{clientes.nombre}
+                            
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                Client's ID
+                            </f:facet>
+                                #{clientes.documento}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                Address
+                            </f:facet>
+                                #{clientes.direccion}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                Phone number
+                            </f:facet>
+                                #{clientes.telefono}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                Client's Email
+                            </f:facet>
+                                #{clientes.email}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                Rented Products
+                            </f:facet>
+                                #{clientes.rentados}
+                        </p:column>
+                    </p:dataTable>
+            
+                        <h3 style="margin-top: 0">Write New Client's Name</h3>
+                        <p:inputText value="#{AlquilerItems.nombreEsperado}"/>
+                        <h3 style="margin-top: 0">Write Client's ID</h3>
+                        <h:panelGrid columns="1" style="margin-bottom: 10px">
+                            <p:inputText value="#{AlquilerItems.idEsperado}"/>
+                        </h:panelGrid>
+                        <h3 style="margin-top: 0">Write Client's Phone Number</h3>
+                        <h:panelGrid columns="1" style="margin-bottom: 10px">
+                            <p:inputText value="#{AlquilerItems.telefonoEsperado}"/>
+                        </h:panelGrid>
+                        <h3 style="margin-top: 0">Write Client's Address</h3>
+                        <h:panelGrid columns="1" style="margin-bottom: 10px">
+                            <p:inputText value="#{AlquilerItems.direccionEsperada}"/>
+                        </h:panelGrid>
+                        <h3 style="margin-top: 0">Write Client's Email</h3>
+                        <h:panelGrid columns="1" style="margin-bottom: 10px">
+                            <p:inputText value="#{AlquilerItems.emailEsperado}"/>
+                        </h:panelGrid>
+                        <p:commandButton value="Register" update="cr" actionListener="#{AlquilerItems.anadirCliente()}"/>
+                    <h3/>
+                    <H3/>
+         </h:form>   
   
     </h:body>
 </html>
