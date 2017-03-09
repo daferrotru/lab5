@@ -6,7 +6,10 @@
     <h:head></h:head>
     <h:body>
         <p:separator />
+        
             <h:form id="cr">
+                <p:layout style="min-width:400px;min-height:800px;">
+                <p:layoutUnit position="west" resizable="true" size="800" minSize="100" maxSize="800">
             
                     <p:dataTable var="clientes" value="#{AlquilerItems.clientes}" >
                     
@@ -58,6 +61,10 @@
                             <h:commandButton action="#{AlquilerItems.moveToClientItemRegistration()}" value="SELECT" />
                         </p:column>
                     </p:dataTable>
+                    </p:layoutUnit>
+                    <p:layoutUnit position="center">
+                        
+                        <f:facet name="header">CLIENT REGISTRATION</f:facet>
             
                         <h3 style="margin-top: 0">Write New Client's Name</h3>
                         <p:inputText value="#{AlquilerItems.nombreEsperado}"/>
@@ -78,8 +85,10 @@
                             <p:inputText value="#{AlquilerItems.emailEsperado}"/>
                         </h:panelGrid>
                         <p:commandButton value="Register" update="cr" actionListener="#{AlquilerItems.anadirCliente()}"/>
-                    <h3/>
-                    <H3/>
+                        <h3/>
+                        <H3/>
+                    </p:layoutUnit>
+                </p:layout>
          </h:form>   
   
     </h:body>
