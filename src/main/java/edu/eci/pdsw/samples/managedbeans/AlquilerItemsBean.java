@@ -22,7 +22,7 @@ import javax.faces.bean.SessionScoped;
 public class AlquilerItemsBean implements Serializable {
 
     ServiciosAlquiler sp = ServiciosAlquiler.getInstance();
-    private List<RegistroClientes>addClient;
+    private Cliente newClient;
     private String nombreEsperado;
     private long idEsperado;
     private String direccionEsperada;
@@ -36,14 +36,6 @@ public class AlquilerItemsBean implements Serializable {
      public List<Cliente> getClientes() throws ExcepcionServiciosAlquiler{
         return sp.consultarClientes();
      }
-
-    public List<RegistroClientes> getAddClient() {
-        return addClient;
-    }
-
-    public void setAddClient(List<RegistroClientes> addClient) {
-        this.addClient = addClient;
-    }
 
     public String getNombreEsperado() {
         return nombreEsperado;
@@ -87,12 +79,15 @@ public class AlquilerItemsBean implements Serializable {
     
 
     public void anadirCliente() throws ExcepcionServiciosAlquiler{
-        Cliente newClient=new Cliente(nombreEsperado, idEsperado, telefonoEsperado, direccionEsperada, emailEsperado);
+        newClient=new Cliente(nombreEsperado, idEsperado, telefonoEsperado, direccionEsperada, emailEsperado);
         sp.registrarCliente(newClient);
-        
     }
+    
+    
      
     public String moveToClientItemRegistration(){return "RegistroClienteItem";}
+    
+    public String moveToClientRegistration(){return "RegistroClientes";}
      
 
 }

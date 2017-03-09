@@ -5,7 +5,38 @@
     <h:head></h:head>
 
     <h:body>
+        <form>
+            <p:layout style="min-width:400px;min-height:800px;">
+                <p:layoutUnit position="west" resizable="true" size="800" minSize="100" maxSize="800">
+                    <p:panel header="SELECTED CLIENT" style="margin-bottom:10px;">
 
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <h3 style="margin-top: 0">NAME</h3>
+                            <p:outputLabel value="#{AlquilerItems.nombreEsperado}"/>
+
+                            <h3 style="margin-top: 0">ID</h3>
+                            <p:outputLabel value="#{AlquilerItems.idEsperado}"/>
+
+                            <h3 style="margin-top: 0">Phone Number</h3>
+                            <p:outputLabel value="#{AlquilerItems.telefonoEsperado}"/>
+
+                            <h3 style="margin-top: 0">Address</h3>
+                            <p:outputLabel value="#{AlquilerItems.direccionEsperada}"/>
+
+                            <h3 style="margin-top: 0">Email</h3>
+                            <p:outputLabel value="#{AlquilerItems.emailEsperado}"/>
+
+                        </h:panelGrid>
+                    </p:panel>
+                    <h:commandButton action="RegistroClientes" value="BACK TO CLIENT REGISTRATION" />
+                </p:layoutUnit>
+                <p:layoutUnit position="center">
+                    
+                </p:layoutUnit>
+            </p:layout>
+        </form>
+        
+        
     </h:body>
 
 </html>
