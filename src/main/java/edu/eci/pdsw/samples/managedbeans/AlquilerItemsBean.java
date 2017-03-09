@@ -27,7 +27,7 @@ public class AlquilerItemsBean implements Serializable {
     private long idEsperado;
     private String direccionEsperada;
     private String emailEsperado;
-    private String telefonoEsperado;
+    private String telefonoEsperado;    
     
 
     public AlquilerItemsBean() {
@@ -92,6 +92,7 @@ public class AlquilerItemsBean implements Serializable {
         
     }
      
+    public String moveToClientItemRegistration(){return "RegistroClienteItem";}
      
 
 }

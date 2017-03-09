@@ -50,6 +50,13 @@
                             </f:facet>
                                 #{clientes.rentados}
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                Client Selection
+                            </f:facet>
+                            
+                            <h:commandButton action="#{AlquilerItems.moveToClientItemRegistration()}" value="SELECT" />
+                        </p:column>
                     </p:dataTable>
             
                         <h3 style="margin-top: 0">Write New Client's Name</h3>
