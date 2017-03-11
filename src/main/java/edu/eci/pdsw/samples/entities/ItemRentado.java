@@ -56,7 +56,4 @@ public class ItemRentado implements Serializable{
     public void setFechafinrenta(Date fechafinrenta) {
         this.fechafinrenta = fechafinrenta;
     }
-
-   
-
 }

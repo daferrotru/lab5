@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3c.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head></h:head>
 
     <h:body>
-        <form>
-            <p:layout style="min-width:400px;min-height:800px;">
-                <p:layoutUnit position="west" resizable="true" size="800" minSize="100" maxSize="800">
+        <h:form>
+            <p:layout style="min-width:200px;min-height:800px;">
+                <p:layoutUnit position="west" resizable="true" size="600" minSize="100" maxSize="600">
                     <p:panel header="SELECTED CLIENT" style="margin-bottom:10px;">
 
                         <h:panelGrid columns="2" cellpadding="5">
@@ -29,14 +30,28 @@
                         </h:panelGrid>
                     </p:panel>
                     <h:commandButton action="RegistroClientes" value="BACK TO CLIENT REGISTRATION" />
+                    <h:commandButton action="RegistroAlquiler" value="RENT ITEM" />
                 </p:layoutUnit>
-                <p:layoutUnit position="center">
-                    
+                <p:layoutUnit position="center" resizable="true" size="600" minSize="100" maxSize="600">
+                    <p:dataTable id="rentdt" var="item" value="#{AlquilerItems.itemsRentados}" rowKey="#{p.id}">
+                        <f:facet name="header">
+                            Items Rentados
+                        </f:facet>
+                        <p:column headerText="Id">
+                            <h:outputText value="#{item.item.id}" />
+                        </p:column>
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{item.item.nombre}" />
+                        </p:column>
+                        <p:column headerText="Multa">
+                            <h:outputText value="#{AlquilerItems.getMultaItem(item)}" />
+                        </p:column>
+                    </p:dataTable>
                 </p:layoutUnit>
             </p:layout>
-        </form>
-        
-        
+        </h:form>
+
+
     </h:body>
 
 </html>

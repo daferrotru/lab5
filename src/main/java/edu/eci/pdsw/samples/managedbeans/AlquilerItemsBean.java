@@ -7,6 +7,7 @@ package edu.eci.pdsw.samples.managedbeans;
 
 import edu.eci.pdsw.samples.services.ServiciosAlquiler;
 import edu.eci.pdsw.samples.entities.Cliente;
+import edu.eci.pdsw.samples.entities.ItemRentado;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
 import java.io.Serializable;
 import java.util.List;
@@ -33,9 +34,9 @@ public class AlquilerItemsBean implements Serializable {
     public AlquilerItemsBean() {
     }
     
-     public List<Cliente> getClientes() throws ExcepcionServiciosAlquiler{
+    public List<Cliente> getClientes() throws ExcepcionServiciosAlquiler{
         return sp.consultarClientes();
-     }
+    }
 
     public String getNombreEsperado() {
         return nombreEsperado;
@@ -83,11 +84,19 @@ public class AlquilerItemsBean implements Serializable {
         sp.registrarCliente(newClient);
     }
     
-    
-     
     public String moveToClientItemRegistration(){return "RegistroClienteItem";}
     
     public String moveToClientRegistration(){return "RegistroClientes";}
-     
-
+    
+    //--------------------------------------
+    //Servicios Alquiler
+    //--------------------------------------
+    
+    public List<ItemRentado> getItemsRentados() throws ExcepcionServiciosAlquiler{
+        return sp.consultarItemsCliente(idEsperado);
+    }
+    
+    public long getMultaItem(ItemRentado item) throws ExcepcionServiciosAlquiler{
+        return sp.consultarMultaAlquiler(item.getItem().getId(), item.getFechafinrenta());
+    }
 }
