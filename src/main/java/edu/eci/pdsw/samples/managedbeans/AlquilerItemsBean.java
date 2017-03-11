@@ -7,12 +7,16 @@ package edu.eci.pdsw.samples.managedbeans;
 
 import edu.eci.pdsw.samples.services.ServiciosAlquiler;
 import edu.eci.pdsw.samples.entities.Cliente;
+import edu.eci.pdsw.samples.entities.Item;
 import edu.eci.pdsw.samples.entities.ItemRentado;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import org.joda.time.Days;
+import org.joda.time.LocalDate;
 
 /**
  *
@@ -28,13 +32,12 @@ public class AlquilerItemsBean implements Serializable {
     private long idEsperado;
     private String direccionEsperada;
     private String emailEsperado;
-    private String telefonoEsperado;    
-    
+    private String telefonoEsperado;
 
     public AlquilerItemsBean() {
     }
-    
-    public List<Cliente> getClientes() throws ExcepcionServiciosAlquiler{
+
+    public List<Cliente> getClientes() throws ExcepcionServiciosAlquiler {
         return sp.consultarClientes();
     }
 
@@ -77,26 +80,69 @@ public class AlquilerItemsBean implements Serializable {
     public void setDireccionEsperada(String direccionEsperada) {
         this.direccionEsperada = direccionEsperada;
     }
-    
 
-    public void anadirCliente() throws ExcepcionServiciosAlquiler{
-        newClient=new Cliente(nombreEsperado, idEsperado, telefonoEsperado, direccionEsperada, emailEsperado);
+    public void anadirCliente() throws ExcepcionServiciosAlquiler {
+        newClient = new Cliente(nombreEsperado, idEsperado, telefonoEsperado, direccionEsperada, emailEsperado);
         sp.registrarCliente(newClient);
     }
-    
-    public String moveToClientItemRegistration(){return "RegistroClienteItem";}
-    
-    public String moveToClientRegistration(){return "RegistroClientes";}
-    
+
+    public String moveToClientItemRegistration() {
+        return "RegistroClienteItem";
+    }
+
+    public String moveToClientRegistration() {
+        return "RegistroClientes";
+    }
+
     //--------------------------------------
     //Servicios Alquiler
     //--------------------------------------
-    
-    public List<ItemRentado> getItemsRentados() throws ExcepcionServiciosAlquiler{
+    public List<ItemRentado> getItemsRentados() throws ExcepcionServiciosAlquiler {
         return sp.consultarItemsCliente(idEsperado);
     }
-    
-    public long getMultaItem(ItemRentado item) throws ExcepcionServiciosAlquiler{
+
+    public long getMultaItem(ItemRentado item) throws ExcepcionServiciosAlquiler {
         return sp.consultarMultaAlquiler(item.getItem().getId(), item.getFechafinrenta());
+    }
+
+    private Date start;
+    private Date end;
+
+    private Item selectedItem;
+
+    public void setStartDate(java.util.Date start) {
+        this.start = new java.sql.Date(start.getTime());
+    }
+
+    public void setSelectedItem(Item i) {
+        this.selectedItem = i;
+    }
+
+    public Item getSelectedItem() {
+        return selectedItem;
+    }
+
+    public java.util.Date getStartDate() {
+        return start == null ? new java.util.Date() : new java.util.Date(start.getTime());
+    }
+
+    public void setEndDate(java.util.Date end) {
+        this.end = new java.sql.Date(end.getTime());
+    }
+
+    public java.util.Date getEndDate() {
+        return end == null ? new java.util.Date() : new java.util.Date(end.getTime());
+    }
+
+    public String moveBackOk() throws ExcepcionServiciosAlquiler {
+        if (selectedItem != null) {
+            int numDays = Days.daysBetween(new LocalDate(start.getTime()), new LocalDate(end.getTime())).getDays();
+            sp.registrarAlquilerCliente(start, idEsperado, selectedItem, numDays);
+        }
+        return "RegistroClienteItem";
+    }
+
+    public List<Item> getDisponibles() {
+        return sp.consultarItemsDisponibles();
     }
 }

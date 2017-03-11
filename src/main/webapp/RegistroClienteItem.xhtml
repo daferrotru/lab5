@@ -9,10 +9,10 @@
         <h:form>
             <p:layout style="min-width:200px;min-height:800px;">
                 <p:layoutUnit position="west" resizable="true" size="600" minSize="100" maxSize="600">
-                    <p:panel header="SELECTED CLIENT" style="margin-bottom:10px;">
+                    <p:panel header="Selected Client" style="margin-bottom:10px;">
 
                         <h:panelGrid columns="2" cellpadding="5">
-                            <h3 style="margin-top: 0">NAME</h3>
+                            <h3 style="margin-top: 0">Name</h3>
                             <p:outputLabel value="#{AlquilerItems.nombreEsperado}"/>
 
                             <h3 style="margin-top: 0">ID</h3>
@@ -29,21 +29,21 @@
 
                         </h:panelGrid>
                     </p:panel>
-                    <h:commandButton action="RegistroClientes" value="BACK TO CLIENT REGISTRATION" />
-                    <h:commandButton action="RegistroAlquiler" value="RENT ITEM" />
+                    <h:commandButton action="RegistroClientes" value="Back"/>
+                    <h:commandButton action="RegistroAlquiler" value="Rent Item"/>
                 </p:layoutUnit>
                 <p:layoutUnit position="center" resizable="true" size="600" minSize="100" maxSize="600">
                     <p:dataTable id="rentdt" var="item" value="#{AlquilerItems.itemsRentados}" rowKey="#{p.id}">
                         <f:facet name="header">
-                            Items Rentados
+                            Rented Items
                         </f:facet>
                         <p:column headerText="Id">
                             <h:outputText value="#{item.item.id}" />
                         </p:column>
-                        <p:column headerText="Nombre">
+                        <p:column headerText="Name">
                             <h:outputText value="#{item.item.nombre}" />
                         </p:column>
-                        <p:column headerText="Multa">
+                        <p:column headerText="Fee">
                             <h:outputText value="#{AlquilerItems.getMultaItem(item)}" />
                         </p:column>
                     </p:dataTable>
