@@ -121,6 +121,20 @@ public class AlquilerItemsBean implements Serializable {
     public Item getSelectedItem() {
         return selectedItem;
     }
+    
+    private int input;
+    
+    public void setInput(int input) throws ExcepcionServiciosAlquiler{
+        this.input = input;
+    }
+    
+    public int getInput(){
+        return input;
+    }
+    
+    public void search() throws ExcepcionServiciosAlquiler{
+        selectedItem = sp.consultarItem(input);
+    }
 
     public java.util.Date getStartDate() {
         return start == null ? new java.util.Date() : new java.util.Date(start.getTime());

@@ -18,7 +18,10 @@ and open the template in the editor.
     </h:head>
 
     <h:body>
-        <h:form>
+        <h:form id="form">
+            <p:outputLabel for="inid" value="Item ID: " />
+            <p:inputText id="inid" value="#{AlquilerItems.input}"/>
+            <p:commandButton icon="ui-icon-search" action="#{AlquilerItems.search}" update=":form:itemsdt" />
             <p:dataTable id="itemsdt" var="item" value="#{AlquilerItems.disponibles}" selectionMode="single" selection="#{AlquilerItems.selectedItem}" rowKey="#{item.id}">
                 <f:facet name="header">
                     Available Items
