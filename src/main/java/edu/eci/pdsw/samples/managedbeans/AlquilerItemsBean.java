@@ -13,6 +13,8 @@ import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import org.joda.time.Days;
@@ -33,11 +35,13 @@ public class AlquilerItemsBean implements Serializable {
     private String direccionEsperada;
     private String emailEsperado;
     private String telefonoEsperado;
+    private Cliente selectedClient;
 
     public AlquilerItemsBean() {
     }
 
     public List<Cliente> getClientes() throws ExcepcionServiciosAlquiler {
+        
         return sp.consultarClientes();
     }
 
@@ -81,6 +85,15 @@ public class AlquilerItemsBean implements Serializable {
         this.direccionEsperada = direccionEsperada;
     }
 
+    public Cliente getSelectedClient() {
+        return selectedClient;
+    }
+
+    public void setSelectedClient(Cliente selectedClient) {
+        this.selectedClient = selectedClient;
+    }
+
+    
     public void anadirCliente() throws ExcepcionServiciosAlquiler {
         newClient = new Cliente(nombreEsperado, idEsperado, telefonoEsperado, direccionEsperada, emailEsperado);
         sp.registrarCliente(newClient);
@@ -92,6 +105,18 @@ public class AlquilerItemsBean implements Serializable {
 
     public String moveToClientRegistration() {
         return "RegistroClientes";
+    }
+    
+    public void selectedClient() throws ExcepcionServiciosAlquiler{
+        long idTemp;
+        boolean finish = false;
+        for (int i=0;i<getClientes().size() && !finish;i++){
+            idTemp=getClientes().get(i).getDocumento();
+            if (idTemp==idEsperado){
+                selectedClient=sp.consultarCliente(idEsperado);
+                finish = true;
+            }
+        }
     }
 
     //--------------------------------------

@@ -58,7 +58,7 @@
                                 Client Selection
                             </f:facet>
                             
-                            <h:commandButton action="#{AlquilerItems.moveToClientItemRegistration() }" value="SELECT" />
+                            <h:commandButton value="SELECT" actionListener="#{AlquilerItems.selectedClient()}" action="#{AlquilerItems.moveToClientItemRegistration() }"/>
                         </p:column>
                     </p:dataTable>
                     </p:layoutUnit>
