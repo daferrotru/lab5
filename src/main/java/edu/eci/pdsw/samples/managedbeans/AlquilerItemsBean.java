@@ -107,17 +107,7 @@ public class AlquilerItemsBean implements Serializable {
         return "RegistroClientes";
     }
     
-    public void selectedClient() throws ExcepcionServiciosAlquiler{
-        long idTemp;
-        boolean finish = false;
-        for (int i=0;i<getClientes().size() && !finish;i++){
-            idTemp=getClientes().get(i).getDocumento();
-            if (idTemp==idEsperado){
-                selectedClient=sp.consultarCliente(idEsperado);
-                finish = true;
-            }
-        }
-    }
+   
 
     //--------------------------------------
     //Servicios Alquiler

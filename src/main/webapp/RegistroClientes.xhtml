@@ -11,7 +11,7 @@
                 <p:layout style="min-width:400px;min-height:800px;">
                 <p:layoutUnit position="west" resizable="true" size="800" minSize="100" maxSize="800">
             
-                    <p:dataTable var="clientes" value="#{AlquilerItems.clientes}" >
+                    <p:dataTable var="clientes" value="#{AlquilerItems.clientes}" rowKey="#{clientes.documento}">
                     
                         <f:facet name="header">
                             List of Clients
@@ -58,7 +58,9 @@
                                 Client Selection
                             </f:facet>
                             
-                            <h:commandButton value="SELECT" actionListener="#{AlquilerItems.selectedClient()}" action="#{AlquilerItems.moveToClientItemRegistration() }"/>
+                            <p:commandButton value="SELECT" actionListener="#{AlquilerItems.setSelectedClient(clientes)}" action="#{AlquilerItems.moveToClientItemRegistration() }"/>
+                                
+                            
                         </p:column>
                     </p:dataTable>
                     </p:layoutUnit>
