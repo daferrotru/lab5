@@ -12,9 +12,9 @@ and open the template in the editor.
     <h:head>
         <h:outputLabel value="Rent Item"/>
         <br></br>
-        <h:outputLabel value="Id: #{AlquilerItems.idEsperado}"/>
+        <h:outputLabel value="Id: #{AlquilerItems.selectedClient.documento}"/>
         <br></br>
-        <h:outputLabel value=" Name: #{AlquilerItems.nombreEsperado}"/>
+        <h:outputLabel value=" Name: #{AlquilerItems.selectedClient.nombre}"/>
     </h:head>
 
     <h:body>

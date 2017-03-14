@@ -41,7 +41,7 @@ public class AlquilerItemsBean implements Serializable {
     }
 
     public List<Cliente> getClientes() throws ExcepcionServiciosAlquiler {
-        
+
         return sp.consultarClientes();
     }
 
@@ -93,7 +93,6 @@ public class AlquilerItemsBean implements Serializable {
         this.selectedClient = selectedClient;
     }
 
-    
     public void anadirCliente() throws ExcepcionServiciosAlquiler {
         newClient = new Cliente(nombreEsperado, idEsperado, telefonoEsperado, direccionEsperada, emailEsperado);
         sp.registrarCliente(newClient);
@@ -106,14 +105,12 @@ public class AlquilerItemsBean implements Serializable {
     public String moveToClientRegistration() {
         return "RegistroClientes";
     }
-    
-   
 
     //--------------------------------------
     //Servicios Alquiler
     //--------------------------------------
     public List<ItemRentado> getItemsRentados() throws ExcepcionServiciosAlquiler {
-        return sp.consultarItemsCliente(idEsperado);
+        return sp.consultarItemsCliente(selectedClient.getDocumento());
     }
 
     public long getMultaItem(ItemRentado item) throws ExcepcionServiciosAlquiler {
@@ -136,18 +133,18 @@ public class AlquilerItemsBean implements Serializable {
     public Item getSelectedItem() {
         return selectedItem;
     }
-    
+
     private int input;
-    
-    public void setInput(int input) throws ExcepcionServiciosAlquiler{
+
+    public void setInput(int input) throws ExcepcionServiciosAlquiler {
         this.input = input;
     }
-    
-    public int getInput(){
+
+    public int getInput() {
         return input;
     }
-    
-    public void search() throws ExcepcionServiciosAlquiler{
+
+    public void search() throws ExcepcionServiciosAlquiler {
         selectedItem = sp.consultarItem(input);
     }
 
@@ -166,7 +163,7 @@ public class AlquilerItemsBean implements Serializable {
     public String moveBackOk() throws ExcepcionServiciosAlquiler {
         if (selectedItem != null) {
             int numDays = Days.daysBetween(new LocalDate(start.getTime()), new LocalDate(end.getTime())).getDays();
-            sp.registrarAlquilerCliente(start, idEsperado, selectedItem, numDays);
+            sp.registrarAlquilerCliente(start, selectedClient.getDocumento(), selectedItem, numDays);
         }
         return "RegistroClienteItem";
     }

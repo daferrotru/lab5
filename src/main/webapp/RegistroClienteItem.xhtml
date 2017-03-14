@@ -13,19 +13,19 @@
 
                         <h:panelGrid columns="2" cellpadding="5">
                             <h3 style="margin-top: 0">Name</h3>
-                            <p:outputLabel value="#{AlquilerItems.nombreEsperado}"/>
+                            <p:outputLabel value="#{AlquilerItems.selectedClient.nombre}"/>
 
                             <h3 style="margin-top: 0">ID</h3>
-                            <p:outputLabel value="#{AlquilerItems.idEsperado}"/>
+                            <p:outputLabel value="#{AlquilerItems.selectedClient.documento}"/>
 
                             <h3 style="margin-top: 0">Phone Number</h3>
-                            <p:outputLabel value="#{AlquilerItems.telefonoEsperado}"/>
+                            <p:outputLabel value="#{AlquilerItems.selectedClient.telefono}"/>
 
                             <h3 style="margin-top: 0">Address</h3>
-                            <p:outputLabel value="#{AlquilerItems.direccionEsperada}"/>
+                            <p:outputLabel value="#{AlquilerItems.selectedClient.direccion}"/>
 
                             <h3 style="margin-top: 0">Email</h3>
-                            <p:outputLabel value="#{AlquilerItems.emailEsperado}"/>
+                            <p:outputLabel value="#{AlquilerItems.selectedClient.email}"/>
 
                         </h:panelGrid>
                     </p:panel>
@@ -33,7 +33,7 @@
                     <h:commandButton action="RegistroAlquiler" value="Rent Item"/>
                 </p:layoutUnit>
                 <p:layoutUnit position="center" resizable="true" size="600" minSize="100" maxSize="600">
-                    <p:dataTable id="rentdt" var="item" value="#{AlquilerItems.itemsRentados}" rowKey="#{p.id}">
+                    <p:dataTable id="rentdt" var="item" value="#{AlquilerItems.itemsRentados}" rowKey="#{item.item}">
                         <f:facet name="header">
                             Rented Items
                         </f:facet>
