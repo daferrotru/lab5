@@ -111,7 +111,7 @@ public class AlquilerItemsBean implements Serializable {
     //Servicios Alquiler
     //--------------------------------------
     public List<ItemRentado> getItemsRentados() throws ExcepcionServiciosAlquiler {
-        return sp.consultarItemsCliente(selectedClient.getDocumento());
+        return selectedClient.getRentados();
     }
 
     public long getMultaItem(ItemRentado item) throws ExcepcionServiciosAlquiler {

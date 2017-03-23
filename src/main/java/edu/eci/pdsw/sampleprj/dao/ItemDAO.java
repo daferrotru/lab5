@@ -6,6 +6,7 @@
 package edu.eci.pdsw.sampleprj.dao;
 
 import edu.eci.pdsw.samples.entities.Item;
+import java.util.List;
 
 /**
  *
@@ -17,4 +18,5 @@ public interface ItemDAO {
     
     public Item load(int id) throws PersistenceException;
     
+    public List<Item> loadAll() throws PersistenceException;
 }

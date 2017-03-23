@@ -6,6 +6,7 @@
 package edu.eci.pdsw.sampleprj.dao;
 
 import edu.eci.pdsw.samples.entities.Cliente;
+import java.util.List;
 
 /**
  *
@@ -17,4 +18,5 @@ public interface ClienteDAO {
     
     public Cliente load(int id) throws PersistenceException;
     
+    public List<Cliente> loadAll() throws PersistenceException;
 }

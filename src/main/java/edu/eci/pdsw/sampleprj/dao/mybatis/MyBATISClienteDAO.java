@@ -10,6 +10,7 @@ import edu.eci.pdsw.sampleprj.dao.ClienteDAO;
 import edu.eci.pdsw.sampleprj.dao.PersistenceException;
 import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ClienteMapper;
 import edu.eci.pdsw.samples.entities.Cliente;
+import java.util.List;
 
 /**
  *
@@ -23,7 +24,7 @@ public class MyBATISClienteDAO implements ClienteDAO {
     @Override
     public void save(Cliente c) throws PersistenceException {
         try{
-            clienteMapper.consultarClientes();
+            clienteMapper.agregarCliente(c);
         }
         catch(org.apache.ibatis.exceptions.PersistenceException e){
             throw new PersistenceException("Error al registrar el cliente"+ c.toString(), e);
@@ -33,11 +34,21 @@ public class MyBATISClienteDAO implements ClienteDAO {
 
     @Override
     public Cliente load(int id) throws PersistenceException {
-         try{
+        try{
             return clienteMapper.consultarCliente(id);
         }
         catch(org.apache.ibatis.exceptions.PersistenceException e){
             throw new PersistenceException("Error al consultar el cliente "+id,e);
+        }
+    }
+
+    @Override
+    public List<Cliente> loadAll() throws PersistenceException {
+        try{
+            return clienteMapper.consultarClientes();
+        }
+        catch(org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al consultar la lista de clientes",e);
         }
     }
     
