@@ -8,7 +8,7 @@ package edu.eci.pdsw.samples.tests;
 import edu.eci.pdsw.samples.entities.Cliente;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.pdsw.samples.services.ServiciosAlquiler;
-import edu.eci.pdsw.samples.services.ServiciosAlquilerItemsStub;
+//import edu.eci.pdsw.samples.services.ServiciosAlquilerItemsStub;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -21,7 +21,7 @@ public class ClientesTest {
 
     public ClientesTest() {
     }
-    
+    /**
     @Before
     public void setUp() {
     }
@@ -38,7 +38,7 @@ public class ClientesTest {
     
     
     
-    
+    */
     
     
 }

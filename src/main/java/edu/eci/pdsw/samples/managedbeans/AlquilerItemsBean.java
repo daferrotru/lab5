@@ -10,6 +10,7 @@ import edu.eci.pdsw.samples.entities.Cliente;
 import edu.eci.pdsw.samples.entities.Item;
 import edu.eci.pdsw.samples.entities.ItemRentado;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
+import edu.eci.pdsw.samples.services.ServiciosAlquilerFactory;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
@@ -28,7 +29,7 @@ import org.joda.time.LocalDate;
 @SessionScoped
 public class AlquilerItemsBean implements Serializable {
 
-    ServiciosAlquiler sp = ServiciosAlquiler.getInstance();
+    ServiciosAlquiler sp = ServiciosAlquilerFactory.getInstance().getServiciosAlquiler();
     private Cliente newClient;
     private String nombreEsperado;
     private long idEsperado;
