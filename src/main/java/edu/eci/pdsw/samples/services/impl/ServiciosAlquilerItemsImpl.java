@@ -13,6 +13,7 @@ import edu.eci.pdsw.samples.entities.TipoItem;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.pdsw.samples.services.ServiciosAlquiler;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -50,7 +51,11 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public List<ItemRentado> consultarItemsCliente(long idcliente) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return daoCliente.consultarItemsCliente((int)idcliente);
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al consultar el Cliente " + idcliente, ex);
+        }
     }
 
     @Override
@@ -74,7 +79,7 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
     @Override
     public List<Item> consultarItemsDisponibles() {
         try {
-            return daoItem.loadAll();
+            return daoItem.loadAvailable();
         } catch (PersistenceException ex) {
             Logger.getLogger(ServiciosAlquilerItemsImpl.class.getName()).log(Level.SEVERE, null, ex);
             return new LinkedList<>();
@@ -98,7 +103,13 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public void registrarAlquilerCliente(Date date, long docu, Item item, int numdias) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            LocalDate ld = date.toLocalDate();
+            LocalDate ld2 = ld.plusDays(numdias);
+            daoCliente.agregarItemRentadoACliente((int) docu, item.getId(), date, Date.valueOf(ld2));
+        } catch (PersistenceException ex) {
+            Logger.getLogger(ServiciosAlquilerItemsImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
