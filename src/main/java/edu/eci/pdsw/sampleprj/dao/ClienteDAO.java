@@ -27,4 +27,6 @@ public interface ClienteDAO {
     public List<ItemRentado> consultarItemsCliente(int id_cliente) throws PersistenceException;
     
     public void returnItem(int iditem) throws PersistenceException;
+
+    public ItemRentado consultarItemCliente(int iditem) throws PersistenceException;
 }

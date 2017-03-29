@@ -34,12 +34,5 @@ public class ClientesTest {
         Cliente cliente=new Cliente("Daniel Rodriguez",101236547, "3186688626", "CALLE 63 #45-86", "daferrotru@hotmail.com");
         sa.registrarCliente(cliente);
         assertEquals("Daniel Rodriguez", sa.consultarCliente(101236547).getNombre());
-    }   
-    
-    
-    
-    
-    
-    
-    
+    }       
 }

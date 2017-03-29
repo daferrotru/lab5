@@ -95,6 +95,31 @@
         WHERE ir.CLIENTES_documento = #{id_cliente}
     </select>
     
+    <select parameterType="map" id="consultarItemCliente" resultMap="ItemRentadoResult">
+        select
+        
+        ir.id,
+        ir.CLIENTES_documento,
+        ir.fechainiciorenta,
+        ir.fechafinrenta,
+
+        i.id as i_id,
+        i.nombre as i_nombre,
+        i.descripcion as i_descripcion,
+        i.fechalanzamiento as i_fechalanzamiento,
+        i.tarifaxdia as i_tarifaxdia,
+        i.formatorenta as i_formatorenta,
+        i.genero as i_genero,        
+        ti.id as i_ti_id,
+        ti.descripcion as i_ti_descripcion
+        
+        FROM VI_ITEMRENTADO as ir
+        left join VI_ITEMS as i on ir.ITEMS_id=i.id 
+        left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
+        
+        WHERE ir.ITEMS_id = #{id_item}
+    </select>
+    
     <insert parameterType="map" id="agregarItemRentadoACliente">
         insert into VI_ITEMRENTADO
         

@@ -78,4 +78,13 @@ public class MyBATISClienteDAO implements ClienteDAO {
         }
     }
 
+    @Override
+    public ItemRentado consultarItemCliente(int iditem) throws PersistenceException {
+        try {
+            return clienteMapper.consultarItemCliente(iditem);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("Error al consultar el item rentado " + iditem, e);
+        }
+    }
+
 }

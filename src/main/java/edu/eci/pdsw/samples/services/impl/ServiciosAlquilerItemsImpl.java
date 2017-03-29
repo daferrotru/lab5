@@ -93,12 +93,18 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public long consultarMultaAlquiler(int iditem, Date fechaDevolucion) throws ExcepcionServiciosAlquiler {
-        java.util.Date today = new java.util.Date();
-        if (today.before(fechaDevolucion)) {
+        java.util.Date fin = getFechaInicioRenta(iditem).getFechafinrenta();
+        if (fechaDevolucion.before(fin)) {
             return 0;
-        } else {
-            Item rentado = consultarItem(iditem);
-            return Days.daysBetween(new org.joda.time.LocalDate(today.getTime()), new org.joda.time.LocalDate(fechaDevolucion.getTime())).getDays() * rentado.getTarifaxDia() * -1;
+        }
+        return Days.daysBetween(new org.joda.time.LocalDate(fin.getTime()), new org.joda.time.LocalDate(fechaDevolucion.getTime())).getDays() * valorMultaRetrasoxDia();
+    }
+
+    private ItemRentado getFechaInicioRenta(int iditem) throws ExcepcionServiciosAlquiler {
+        try {
+            return daoCliente.consultarItemCliente(iditem);
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al consultar el item rentado " + iditem, ex);
         }
     }
 

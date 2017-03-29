@@ -18,7 +18,7 @@
     <select parameterType="map" id="getTipoItem" resultMap="TipoItemResult">
         select
         
-        ti.id
+        ti.id,
         ti.descripcion
         
         from VI_TIPOITEM as ti
@@ -29,7 +29,7 @@
     <select parameterType="map" id="getTiposItems" resultMap="TipoItemResult">
         select
         
-        ti.id
+        ti.id,
         ti.descripcion
         
         from VI_TIPOITEM as ti
