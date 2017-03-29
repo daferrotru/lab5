@@ -51,14 +51,14 @@
                             <f:facet name="header">
                                 Rented Products
                             </f:facet>
-                                #{clientes.rentados}
+                                #{clientes.rentados.size()}
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 Client Selection
                             </f:facet>
                             
-                            <p:commandButton value="SELECT" actionListener="#{AlquilerItems.setSelectedClient(clientes)}" action="#{AlquilerItems.moveToClientItemRegistration() }"/>
+                            <p:commandButton value="Select" actionListener="#{AlquilerItems.setSelectedClient(clientes)}" action="#{AlquilerItems.moveToClientItemRegistration() }"/>
                                 
                             
                         </p:column>

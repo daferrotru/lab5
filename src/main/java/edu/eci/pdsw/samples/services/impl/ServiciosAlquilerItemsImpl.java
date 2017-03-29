@@ -5,6 +5,7 @@ import com.google.inject.Singleton;
 import edu.eci.pdsw.sampleprj.dao.ClienteDAO;
 import edu.eci.pdsw.sampleprj.dao.ItemDAO;
 import edu.eci.pdsw.sampleprj.dao.PersistenceException;
+import edu.eci.pdsw.sampleprj.dao.TipoItemDAO;
 
 import edu.eci.pdsw.samples.entities.Cliente;
 import edu.eci.pdsw.samples.entities.Item;
@@ -18,6 +19,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.joda.time.Days;
 import org.mybatis.guice.transactional.Transactional;
 
 /**
@@ -28,12 +30,15 @@ import org.mybatis.guice.transactional.Transactional;
 public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     private static final int MULTA_DIARIA = 5000;
-    
+
     @Inject
     private ItemDAO daoItem;
 
     @Inject
     private ClienteDAO daoCliente;
+
+    @Inject
+    private TipoItemDAO daoTipoItem;
 
     @Override
     public int valorMultaRetrasoxDia() {
@@ -52,7 +57,7 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
     @Override
     public List<ItemRentado> consultarItemsCliente(long idcliente) throws ExcepcionServiciosAlquiler {
         try {
-            return daoCliente.consultarItemsCliente((int)idcliente);
+            return daoCliente.consultarItemsCliente((int) idcliente);
         } catch (PersistenceException ex) {
             throw new ExcepcionServiciosAlquiler("Error al consultar el Cliente " + idcliente, ex);
         }
@@ -88,17 +93,31 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public long consultarMultaAlquiler(int iditem, Date fechaDevolucion) throws ExcepcionServiciosAlquiler {
-        return 0l;
+        java.util.Date today = new java.util.Date();
+        if (today.before(fechaDevolucion)) {
+            return 0;
+        } else {
+            Item rentado = consultarItem(iditem);
+            return Days.daysBetween(new org.joda.time.LocalDate(today.getTime()), new org.joda.time.LocalDate(fechaDevolucion.getTime())).getDays() * rentado.getTarifaxDia() * -1;
+        }
     }
 
     @Override
     public TipoItem consultarTipoItem(int id) throws ExcepcionServiciosAlquiler {
-        return consultarItem(id).getTipo();
+        try {
+            return daoTipoItem.load(id);
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al consultar el tipo de item " + id, ex);
+        }
     }
 
     @Override
     public List<TipoItem> consultarTiposItem() throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return daoTipoItem.loadAll();
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al consultar los tipos de items", ex);
+        }
     }
 
     @Override
@@ -123,7 +142,11 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public void registrarDevolucion(int iditem) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            daoCliente.returnItem(iditem);
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al devolver el item " + iditem, ex);
+        }
     }
 
     @Override
@@ -139,12 +162,12 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
     @Override
     public void registrarItem(Item i) throws ExcepcionServiciosAlquiler {
         //FALTA
-         try {
+        try {
             daoItem.save(i);
         } catch (PersistenceException ex) {
             throw new ExcepcionServiciosAlquiler("Error al registrar item " + i, ex);
         }
-        
+
     }
 
     @Override

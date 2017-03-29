@@ -69,4 +69,13 @@ public class MyBATISClienteDAO implements ClienteDAO {
         }
     }
 
+    @Override
+    public void returnItem(int iditem) throws PersistenceException {
+        try {
+            clienteMapper.devolverItem(iditem);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("Error al devolver el item " + iditem, e);
+        }
+    }
+
 }

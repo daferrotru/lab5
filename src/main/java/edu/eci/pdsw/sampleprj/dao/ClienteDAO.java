@@ -25,4 +25,6 @@ public interface ClienteDAO {
     public void agregarItemRentadoACliente(int id_cliente, int id_item, Date fechaInicio, Date fechaFin) throws PersistenceException;
     
     public List<ItemRentado> consultarItemsCliente(int id_cliente) throws PersistenceException;
+    
+    public void returnItem(int iditem) throws PersistenceException;
 }

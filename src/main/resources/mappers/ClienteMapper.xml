@@ -125,6 +125,10 @@
         #{n_cliente.vetado})
     </insert>
     
+    <delete parameterType="map" id="devolverItem">
+        delete from VI_ITEMRENTADO
+        where ITEMS_id = #{id_item}
+    </delete>
     
     <resultMap type='Cliente' id='ClienteResult'>
         <id property='documento' column='documento'/>

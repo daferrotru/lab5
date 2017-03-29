@@ -142,7 +142,7 @@ public class AlquilerItemsBean implements Serializable {
     }
 
     public int getInput() {
-        return input;
+        return input-=input;
     }
 
     public void search() throws ExcepcionServiciosAlquiler {
@@ -167,6 +167,10 @@ public class AlquilerItemsBean implements Serializable {
             sp.registrarAlquilerCliente(start, selectedClient.getDocumento(), selectedItem, numDays);
         }
         return "RegistroClienteItem";
+    }
+    
+    public void devolverItem() throws ExcepcionServiciosAlquiler{
+        sp.registrarDevolucion(input);
     }
 
     public List<Item> getDisponibles() {

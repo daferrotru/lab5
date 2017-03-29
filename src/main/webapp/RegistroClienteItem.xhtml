@@ -6,7 +6,7 @@
     <h:head></h:head>
 
     <h:body>
-        <h:form>
+        <h:form id="s_form">
             <p:layout style="min-width:200px;min-height:800px;">
                 <p:layoutUnit position="west" resizable="true" size="600" minSize="100" maxSize="600">
                     <p:panel header="Selected Client" style="margin-bottom:10px;">
@@ -31,6 +31,10 @@
                     </p:panel>
                     <h:commandButton action="RegistroClientes" value="Back"/>
                     <h:commandButton action="RegistroAlquiler" value="Rent Item"/>
+                    <h:form id="form">
+                        <h:inputText id="inid" value="#{AlquilerItems.input}"/>
+                        <p:commandButton value="Return" action="#{AlquilerItems.devolverItem}" update=":s_form:rentdt" />
+                    </h:form>
                 </p:layoutUnit>
                 <p:layoutUnit position="center" resizable="true" size="600" minSize="100" maxSize="600">
                     <p:dataTable id="rentdt" var="item" value="#{AlquilerItems.itemsRentados}" rowKey="#{item.item}">
@@ -42,6 +46,12 @@
                         </p:column>
                         <p:column headerText="Name">
                             <h:outputText value="#{item.item.nombre}" />
+                        </p:column>
+                        <p:column headerText="Start">
+                            <h:outputText value="#{item.fechainiciorenta}" />
+                        </p:column>
+                        <p:column headerText="End">
+                            <h:outputText value="#{item.fechafinrenta}" />
                         </p:column>
                         <p:column headerText="Fee">
                             <h:outputText value="#{AlquilerItems.getMultaItem(item)}" />

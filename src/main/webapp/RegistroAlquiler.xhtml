@@ -32,6 +32,12 @@ and open the template in the editor.
                 <p:column headerText="Name">
                     <h:outputText value="#{item.nombre}" />
                 </p:column>
+                <p:column headerText="Type">
+                    <h:outputText value="#{item.tipo.descripcion}" />
+                </p:column>
+                <p:column headerText="Format">
+                    <h:outputText value="#{item.formatoRenta}" />
+                </p:column>
                 <p:column headerText="Fee">
                     <h:outputText value="#{item.tarifaxDia}" />
                 </p:column>
