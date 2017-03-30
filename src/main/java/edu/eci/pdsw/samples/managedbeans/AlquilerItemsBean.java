@@ -115,7 +115,11 @@ public class AlquilerItemsBean implements Serializable {
     }
 
     public long getMultaItem(ItemRentado item) throws ExcepcionServiciosAlquiler {
-        return sp.consultarMultaAlquiler(item.getItem().getId(), item.getFechafinrenta());
+        if(item!=null) {
+            Item temp = item.getItem();
+            if(temp!=null) return sp.consultarMultaAlquiler(temp.getId(), item.getFechafinrenta());
+        }
+        throw new ExcepcionServiciosAlquiler("El item rentado es nulo, inconsistencia en la base de datos compartida");
     }
 
     private Date start;

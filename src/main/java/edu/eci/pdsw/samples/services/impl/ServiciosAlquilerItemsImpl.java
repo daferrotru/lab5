@@ -93,14 +93,17 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public long consultarMultaAlquiler(int iditem, Date fechaDevolucion) throws ExcepcionServiciosAlquiler {
-        java.util.Date fin = getFechaInicioRenta(iditem).getFechafinrenta();
-        if (fechaDevolucion.before(fin)) {
-            return 0;
+        ItemRentado temp = consultarItemCliente(iditem);
+        if (temp != null) {
+            Date fin = temp.getFechafinrenta();
+            if (fechaDevolucion.after(fin)) {
+                return Days.daysBetween(new org.joda.time.LocalDate(fin.getTime()), new org.joda.time.LocalDate(fechaDevolucion.getTime())).getDays() * valorMultaRetrasoxDia();
+            }
         }
-        return Days.daysBetween(new org.joda.time.LocalDate(fin.getTime()), new org.joda.time.LocalDate(fechaDevolucion.getTime())).getDays() * valorMultaRetrasoxDia();
+        throw new ExcepcionServiciosAlquiler("Error al consultar la multa del alquiler " + iditem);
     }
 
-    private ItemRentado getFechaInicioRenta(int iditem) throws ExcepcionServiciosAlquiler {
+    private ItemRentado consultarItemCliente(int iditem) throws ExcepcionServiciosAlquiler {
         try {
             return daoCliente.consultarItemCliente(iditem);
         } catch (PersistenceException ex) {
