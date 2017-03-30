@@ -41,7 +41,7 @@ public class AlquilerTest {
     public void CF1Test() throws ExcepcionServiciosAlquiler {
         ServiciosAlquiler sa = ServiciosAlquilerFactory.getInstance().getServiciosAlquilerTesting();
 
-        Cliente cliente=new Cliente("Daniel Rodriguez",101236547, "3186688626", "CALLE 63 #45-86", "daferrotru@hotmail.com");
+        Cliente cliente=new Cliente("Daniela Rodriguez",777736547, "3186688626", "Calle 163 #4-5", "cossio@hotmail.com");
         sa.registrarCliente(cliente);
         Item i1 = new Item(sa.consultarTipoItem(1), 44, "Los 4 Fantasticos", "Los 4 Fantásticos  es una película de superhéroes  basada en la serie de cómic homónima de Marvel.", java.sql.Date.valueOf("2005-06-08"), 2000, "DVD", "Ciencia Ficcion");
         sa.registrarItem(i1);
